@@ -62,7 +62,8 @@ function previewFile(document) {
     };
     aglio.render(content, options, function (err, html, warnings) {
         if (err) {
-            return error(err);
+            showError(err);
+            return;
         }
 
         const panel = getPanel(document.fileName, fileName);
