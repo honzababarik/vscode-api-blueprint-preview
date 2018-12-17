@@ -1,0 +1,60 @@
+{
+    "name": "api-blueprint-viewer",
+    "displayName": "API Blueprint Viewer",
+    "description": "Preview API Blueprint compatible API documentation right there in Visual Studio Code!",
+    "version": "0.9.0",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "api blueprint",
+        "blueprint",
+        "preview"
+    ],
+    "activationEvents": [
+        "onCommand:extension.previewFile",
+        "onCommand:extension.previewFileLive"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.previewFile",
+                "title": "API Blueprint: Preview"
+            },
+            {
+                "command": "extension.previewFileLive",
+                "title": "API Blueprint: Live Preview (Reload on file save)"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "aglio": "^2.3.0"
+    },
+    "devDependencies": {
+        "typescript": "^3.1.4",
+        "vscode": "^1.1.25",
+        "eslint": "^4.11.0",
+        "@types/node": "^8.10.25",
+        "@types/mocha": "^2.2.42"
+    },
+    "languages": [
+        {
+            "id": "apiblueprint",
+            "aliases": [
+                "API Blueprint",
+                "api blueprint"
+            ],
+            "extensions": [
+                ".apib"
+            ]
+        }
+    ]
+}
