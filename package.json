@@ -2,7 +2,7 @@
     "name": "api-blueprint-viewer",
     "displayName": "API Blueprint Viewer",
     "description": "Preview API Blueprint compatible API documentation right there in Visual Studio Code!",
-    "publisher": "Develite",
+    "publisher": "develiteio",
     "author": {
         "name": "Develite",
         "url": "https://develite.io",
@@ -16,6 +16,10 @@
     "version": "0.9.0",
     "engines": {
         "vscode": "^1.30.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/honzababarik/vscode-api-blueprint-preview"
     },
     "categories": [
         "Other"
