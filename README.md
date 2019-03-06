@@ -18,6 +18,10 @@ We recommend installing [API Elements Extension](https://marketplace.visualstudi
 
 ## Release Notes
 
+### 0.9.1
+
+Fixing parsing extension from the file name
+
 ### 0.9.0
 
 Initial release of API Blueprint Preview
