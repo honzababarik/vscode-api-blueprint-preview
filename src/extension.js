@@ -21,7 +21,7 @@ function getDocumentFileName(document) {
         showError('Unsupported file name.');
         return null;
     }
-    const extension = file[1];
+    const extension = file[file.length - 1];
     if (extension !== 'apib') {
         showError('Unsupported file - make sure you use a file with extension .apib');
         return null;
