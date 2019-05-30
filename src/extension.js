@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const aglio = require('aglio');
+const p = require('path');
 
 function showError(msg) {
     vscode.window.showErrorMessage(msg);
@@ -8,6 +9,15 @@ function showError(msg) {
 function showInfo(msg) {
     vscode.window.showInformationMessage(msg);
 };
+
+function getDocumentFileLocation(document) {
+    const path = p.dirname(document.fileName);
+    if (!path) {
+        showError('Could not determine the file path.');
+        return null;
+    }
+    return path;
+}
 
 function getDocumentFileName(document) {
     const path = document.fileName.split('/');
@@ -52,12 +62,14 @@ function getPanel(file, fileName) {
 
 function previewFile(document) {
     const fileName = getDocumentFileName(document);
-    if (!fileName) {
+    const fileLocation = getDocumentFileLocation(document);
+    if (!fileName && !fileLocation) {
         return;
     }
 
     const content = document.getText();
     const options = {
+        includePath: fileLocation,
         themeVariables: 'default'
     };
     aglio.render(content, options, function (err, html, warnings) {
