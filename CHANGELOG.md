@@ -1,7 +1,13 @@
 # Change Log
-All notable changes to the "api-blueprint-viewer" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### 0.9.2
 
-## [Unreleased]
-- Initial release
+Allowing to use include (thank you [@lidice](https://github.com/lidice)!)
+
+### 0.9.1
+
+Fixing parsing extension from the file name
+
+### 0.9.0
+
+Initial release of API Blueprint Preview

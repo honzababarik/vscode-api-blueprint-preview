@@ -18,6 +18,10 @@ We recommend installing [API Elements Extension](https://marketplace.visualstudi
 
 ## Release Notes
 
+### 0.9.2
+
+Allowing to use include (thank you [@lidice](https://github.com/lidice)!)
+
 ### 0.9.1
 
 Fixing parsing extension from the file name
