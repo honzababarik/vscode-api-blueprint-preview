@@ -13,7 +13,7 @@
     },
     "icon": "img/logo_dark.png",
     "license": "MIT",
-    "version": "0.9.2",
+    "version": "0.9.3",
     "engines": {
         "vscode": "^1.30.0"
     },
@@ -30,21 +30,65 @@
         "preview"
     ],
     "activationEvents": [
-        "onCommand:extension.previewFile",
-        "onCommand:extension.previewFileLive"
+        "onCommand:develite.previewFile",
+        "onCommand:develite.previewFileLive",
+        "onCommand:develite.saveAsHtml"
     ],
     "main": "./src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.previewFile",
+                "command": "develite.previewFile",
                 "title": "API Blueprint: Preview"
             },
             {
-                "command": "extension.previewFileLive",
-                "title": "API Blueprint: Live Preview (Reload on file save)"
+                "command": "develite.previewFileLive",
+                "title": "API Blueprint: Live Preview (Reload on file save)",
+                "icon": {
+                    "dark": "img/show-preview-dark.svg",
+                    "light": "img/show-preview-light.svg"
+                }
+            },
+            {
+                "command": "develite.saveAsHtml",
+                "title": "API Blueprint: Save as HTML"
             }
-        ]
+        ],
+        "languages": [
+            {
+                "id": "apiblueprint",
+                "aliases": [
+                    "API Blueprint",
+                    "api blueprint"
+                ],
+                "extensions": [
+                    ".apib"
+                ]
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                  "when": "editorLangId == apiblueprint",
+                  "command": "develite.previewFileLive",
+                  "group": "navigation"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "develite.previewFile",
+                    "when": "editorLangId == apiblueprint"
+                },
+                {
+                    "command": "develite.previewFileLive",
+                    "when": "editorLangId == apiblueprint"
+                },
+                {
+                    "command": "develite.saveAsHtml",
+                    "when": "editorLangId == apiblueprint"
+                }
+            ]
+        }
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
@@ -59,17 +103,5 @@
         "eslint": "^4.11.0",
         "@types/node": "^8.10.25",
         "@types/mocha": "^2.2.42"
-    },
-    "languages": [
-        {
-            "id": "apiblueprint",
-            "aliases": [
-                "API Blueprint",
-                "api blueprint"
-            ],
-            "extensions": [
-                ".apib"
-            ]
-        }
-    ]
+    }
 }

@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const aglio = require('aglio');
 const p = require('path');
+const fs = require('fs');
 
 function showError(msg) {
     vscode.window.showErrorMessage(msg);
@@ -17,7 +18,7 @@ function getDocumentFileLocation(document) {
         return null;
     }
     return path;
-}
+};
 
 function getDocumentFileName(document) {
     const path = document.fileName.split('/');
@@ -37,7 +38,16 @@ function getDocumentFileName(document) {
         return null;
     }
     return fileName;
-}
+};
+
+function replaceFileExtension(filePath, extension) {
+    const file = filePath.split('.')
+    if (file.length < 2) {
+        return `${filePath}.${extension}`;
+    }
+    file.splice(-1, 1);
+    return `${file.join('.')}.${extension}`;
+};
 
 function getPanel(file, fileName) {
     if (!global.apiblueprint) {
@@ -61,6 +71,13 @@ function getPanel(file, fileName) {
 };
 
 function previewFile(document) {
+    renderFile(document, function (html, fileName) {
+        const panel = getPanel(document.fileName, fileName);
+        panel.webview.html = html;
+    });
+};
+
+function renderFile(document, onRender) {
     const fileName = getDocumentFileName(document);
     const fileLocation = getDocumentFileLocation(document);
     if (!fileName && !fileLocation) {
@@ -75,40 +92,59 @@ function previewFile(document) {
     aglio.render(content, options, function (err, html, warnings) {
         if (err) {
             showError(err);
-            return;
+        } else {
+            onRender(html, fileName);
         }
-
-        const panel = getPanel(document.fileName, fileName);
-        panel.webview.html = html;
     });
-}
+};
+
+function saveAsHtml(document) {
+    renderFile(document, function (html, fileName) {
+        const path = p.dirname(document.fileName);
+        const uri = vscode.Uri.file(`${path}/${replaceFileExtension(fileName, 'html')}`);
+        vscode.window.showSaveDialog({ defaultUri: uri }).then(fileInfos => {
+            if (fileInfos) {
+                fs.writeFileSync(fileInfos.path, html);
+                showInfo(`Preview saved as ${fileInfos.path}`);
+            }
+        });
+    });
+};
 
 function activate(context) {
 
-    let previewFileCommand = vscode.commands.registerTextEditorCommand('extension.previewFile', function () {
+    const previewFileCommand = vscode.commands.registerTextEditorCommand('develite.previewFile', function () {
         const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
+        if (editor) {
+            previewFile(editor.document);
         }
-        previewFile(editor.document);
     });
 
-    let previewFileLiveCommand = vscode.commands.registerTextEditorCommand('extension.previewFileLive', function () {
+    const previewFileLiveCommand = vscode.commands.registerTextEditorCommand('develite.previewFileLive', function () {
         const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
+        if (editor) {
+            previewFile(editor.document);
+            vscode.workspace.onDidSaveTextDocument(function (document) {
+                if (global.apiblueprint.file === document.fileName) {
+                    previewFile(document)
+                }
+            });
         }
-        previewFile(editor.document);
-        vscode.workspace.onDidSaveTextDocument(function (document) {
-            if (global.apiblueprint.file === document.fileName) {
-                previewFile(document)
-            }
-        });
+    });
+
+    const saveAsHtmlCommand = vscode.commands.registerTextEditorCommand('develite.saveAsHtml', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            saveAsHtml(editor.document);
+        }
+
     });
 
     context.subscriptions.push(previewFileCommand);
     context.subscriptions.push(previewFileLiveCommand);
+    context.subscriptions.push(saveAsHtmlCommand);
 }
+
 exports.activate = activate;
 
 // this method is called when your extension is deactivated

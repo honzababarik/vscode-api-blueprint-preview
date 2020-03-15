@@ -10,6 +10,7 @@ We recommend installing [API Elements Extension](https://marketplace.visualstudi
 
 - Preview your API Blueprint file right in Visual Studio Code
 - Preview automatically when you save your `.apib` file
+- Save your rendered API Blueprint preview as HTML file for easy publishing
 
 ## Possible features
 
@@ -17,6 +18,11 @@ We recommend installing [API Elements Extension](https://marketplace.visualstudi
 - Reload on file change without the need of saving
 
 ## Release Notes
+
+### 0.9.3
+
+Adding command to save preview as HTML
+Adding icon to click on a file that can be previewed
 
 ### 0.9.2
 
