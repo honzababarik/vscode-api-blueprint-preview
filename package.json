@@ -13,7 +13,7 @@
     },
     "icon": "img/logo_dark.png",
     "license": "MIT",
-    "version": "0.9.3",
+    "version": "0.9.4",
     "engines": {
         "vscode": "^1.30.0"
     },
@@ -69,9 +69,9 @@
         "menus": {
             "editor/title": [
                 {
-                  "when": "editorLangId == apiblueprint",
-                  "command": "develite.previewFileLive",
-                  "group": "navigation"
+                    "when": "editorLangId == apiblueprint",
+                    "command": "develite.previewFileLive",
+                    "group": "navigation"
                 }
             ],
             "commandPalette": [
@@ -88,6 +88,34 @@
                     "when": "editorLangId == apiblueprint"
                 }
             ]
+        },
+        "configuration": {
+            "title": "API Blueprint Viewer",
+            "properties": {
+                "apiBlueprintViewer.theme.template": {
+                    "type": "string",
+                    "default": "default",
+                    "enum": [
+                        "default", 
+                        "triple"
+                    ],
+                    "enumDescriptions": [
+                        "Two-column format",
+                        "Three-column format"
+                    ]
+                },
+                "apiBlueprintViewer.theme.variables": {
+                    "type": "string",
+                    "default": "default",
+                    "enum": [
+                        "default", 
+                        "streak",
+                        "flatly",
+                        "slate",
+                        "cyborg"
+                    ]
+                }
+            }
         }
     },
     "scripts": {

@@ -84,10 +84,14 @@ function renderFile(document, onRender) {
         return;
     }
 
+    const extensionConfig = vscode.workspace.getConfiguration('apiBlueprintViewer')
+    const themeTemplate = extensionConfig.get('theme.template')
+    const themeVariables = extensionConfig.get('theme.variables')
     const content = document.getText();
     const options = {
         includePath: fileLocation,
-        themeVariables: 'default'
+        themeTemplate: themeTemplate,
+        themeVariables: themeVariables
     };
     aglio.render(content, options, function (err, html, warnings) {
         if (err) {
