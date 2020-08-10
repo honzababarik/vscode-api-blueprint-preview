@@ -10,9 +10,11 @@ We recommend installing [API Elements Extension](https://marketplace.visualstudi
 
 - Preview your API Blueprint file right in Visual Studio Code
 - Preview automatically when you save your `.apib` file
+- Customize theme and layout through Extension Settings
 - Save your rendered API Blueprint preview as HTML file for easy publishing
 
 ## Possible features
 
-- Theming
+- ~~Default aglio theme support~~
+- Themes provided through custom files
 - Reload on file change without the need of saving

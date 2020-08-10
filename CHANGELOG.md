@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.9.4
+
+Provided support for default aglio theme and layout formats through Extension Settings
+
 ### 0.9.3
 
 Adding command to save preview as HTML
