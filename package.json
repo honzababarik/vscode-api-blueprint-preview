@@ -69,7 +69,7 @@
         "menus": {
             "editor/title": [
                 {
-                    "when": "editorLangId == apiblueprint",
+                    "when": "(editorLangId == apiblueprint) || (editorLangId == apib)",
                     "command": "develite.previewFileLive",
                     "group": "navigation"
                 }
@@ -77,15 +77,15 @@
             "commandPalette": [
                 {
                     "command": "develite.previewFile",
-                    "when": "editorLangId == apiblueprint"
+                    "when": "(editorLangId == apiblueprint) || (editorLangId == apib)"
                 },
                 {
                     "command": "develite.previewFileLive",
-                    "when": "editorLangId == apiblueprint"
+                    "when": "(editorLangId == apiblueprint) || (editorLangId == apib)"
                 },
                 {
                     "command": "develite.saveAsHtml",
-                    "when": "editorLangId == apiblueprint"
+                    "when": "(editorLangId == apiblueprint) || (editorLangId == apib)"
                 }
             ]
         },
